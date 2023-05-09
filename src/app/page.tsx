@@ -1,11 +1,10 @@
 "use client";
 import { NextPage } from "next";
 import React, { useEffect } from "react";
-import { generateRandomString } from "../Spotify/CodeVerifier";
+import { generateRandomString } from "@/Spotify/CodeVerifier";
 
 const Home: NextPage = () => {
   const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-  const CLIENT_SECRET = process.env.NEXT_PUBLIC_CLIENT_SECRET;
   const redirectUri = "http://localhost:3000/";
 
   const getParamFromAPI = (hash: string) => {
@@ -17,8 +16,6 @@ const Home: NextPage = () => {
       acc[key] = value;
       return acc;
     }, {});
-
-    console.log(params);
 
     return splitUpParams;
   };
@@ -40,7 +37,7 @@ const Home: NextPage = () => {
       localStorage.clear();
       localStorage.setItem("token", access_token);
       localStorage.setItem("tokenType", token_type);
-      localStorage.setItem("expires_in", expires_in); // will recalculate the time to send another request to get a new token once its expired
+      localStorage.setItem("expires_in", expires_in); // will recalculate the time to send another request to get a new token once
     }
   }, [getParamFromAPI]);
   return (
