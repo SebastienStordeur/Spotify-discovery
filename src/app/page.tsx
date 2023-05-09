@@ -1,41 +1,53 @@
 "use client";
-import axios from "axios";
 import { NextPage } from "next";
 import React, { useEffect } from "react";
-import { useParams } from "next/navigation";
-import { generateRandomString } from "./utils/Spotify/CodeVerifier";
+import { generateRandomString } from "../Spotify/CodeVerifier";
 
 const Home: NextPage = () => {
-  const clientId = process.env.NEXT_PUBLIC_CLIENT_ID;
-  const clientSecret = process.env.NEXT_PUBLIC_CLIENT_SECRET;
+  const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
+  const CLIENT_SECRET = process.env.NEXT_PUBLIC_CLIENT_SECRET;
   const redirectUri = "http://localhost:3000/";
-  const params = useParams();
 
-  generateRandomString(15);
+  const getParamFromAPI = (hash: string) => {
+    const string = hash.substring(1); //string after hash #
+    const params = string.split("&");
 
-  const authData = {
-    grant_type: "client_credentials",
-    client_id: clientId,
-    client_secret: clientSecret,
+    const splitUpParams = params.reduce((acc: any, currentValue: string) => {
+      const [key, value]: any = currentValue.split("=");
+      acc[key] = value;
+      return acc;
+    }, {});
+
+    console.log(params);
+
+    return splitUpParams;
   };
 
-  const fetchSpotifyToken = () => {
-    axios
-      .post("https://accounts.spotify.com/api/token", authData, {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      })
-      .then((response) => console.log(response));
-  };
+  const state = generateRandomString(16);
+  const scope = "user-read-private user-read-email";
 
-  const authenticatedUser = () => {};
+  const url = `https://accounts.spotify.com/authorize?response_type=token&client_id=${CLIENT_ID}&scope=${scope}&redirect_uri=${redirectUri}&state=${state}&show_dialog=true`;
+
+  const handleLogin = () => {
+    window.location = url;
+  };
 
   useEffect(() => {
-    fetchSpotifyToken();
-  }, []);
-
+    if (window !== "undefined" && window.location.hash) {
+      const { access_token, expires_in, token_type } = getParamFromAPI(
+        window.location.hash
+      );
+      localStorage.clear();
+      localStorage.setItem("token", access_token);
+      localStorage.setItem("tokenType", token_type);
+      localStorage.setItem("expires_in", expires_in); // will recalculate the time to send another request to get a new token once its expired
+    }
+  }, [getParamFromAPI]);
   return (
     <div>
-      <button className="border-2">TEST</button>
+      <button className="border-2" onClick={handleLogin}>
+        TEST
+      </button>
     </div>
   );
 };
