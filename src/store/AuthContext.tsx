@@ -50,6 +50,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = () => {
+    setIsAuthenticated(false);
     localStorage.clear();
   };
 
