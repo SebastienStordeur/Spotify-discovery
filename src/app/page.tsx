@@ -1,6 +1,6 @@
 "use client";
 import { NextPage } from "next";
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "@/store/AuthContext";
 
 const Home: NextPage = () => {
@@ -8,7 +8,7 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      //check for any
+      //TODO: check for any
       const isAuthenticated: any = await authCtx.authDataHandler();
       if (isAuthenticated) {
         window.location.href = "http://localhost:3000/profile";
