@@ -1,5 +1,6 @@
 "use client";
 import { generateRandomString } from "@/Spotify/CodeVerifier";
+import { calculateExpirationDate } from "@/utils/ExpirationDate/ExpirationDate";
 import { createContext, useState } from "react";
 import React from "react";
 
@@ -40,9 +41,11 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
 
   const authDataHandler: () => boolean = () => {
     if (window.location.hash) {
-      const { access_token, expires_in, token_type } = getParamsFromAPI(window.location.hash);
+      const { access_token, expires_in } = getParamsFromAPI(window.location.hash);
+      const expirationTime = calculateExpirationDate(+expires_in);
+
       localStorage.setItem("token", access_token);
-      //Calculate expiration time
+      localStorage.setItem("expirationTime", JSON.stringify(expirationTime));
       setIsAuthenticated(true);
       return true;
     }
