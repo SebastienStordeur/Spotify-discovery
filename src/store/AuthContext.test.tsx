@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { render, act, RenderHookResult, renderHook } from "@testing-library/react";
 import AuthContextProvider, { AuthContext } from "./AuthContext";
+import "@testing-library/jest-dom";
 import { generateRandomString } from "../Spotify/CodeVerifier";
 
 /**
@@ -15,16 +16,26 @@ import { generateRandomString } from "../Spotify/CodeVerifier";
  * Auth Context Provider
  */
 
+jest.mock("../Spotify/CodeVerifier", () => ({
+  generateRandomString: jest.fn(() => "mockedrandomstring"),
+}));
+
 describe("AuthContextProvider", () => {
   beforeEach(() => {
     localStorage.clear();
   });
 
-  /* it("should render children components", () => {
-    const ChildComponent = (): JSX.Element => <div>Child component</div>;
+  const contextValue = {
+    isAuthenticated: false,
+    login: () => {},
+    authDataHandler: () => {},
+    logout: () => {},
+  };
+  const ChildComponent = (): JSX.Element => <div>Child component</div>;
 
+  it("should render children components", () => {
     const { getByText } = render(
-      <AuthContext.Provider value={{ isAuthenticated: false }}>
+      <AuthContext.Provider value={contextValue}>
         <AuthContextProvider>
           <ChildComponent />
         </AuthContextProvider>
@@ -32,12 +43,35 @@ describe("AuthContextProvider", () => {
     );
 
     expect(getByText("Child component")).toBeInTheDocument();
-  }); */
+  });
 
-  /**
-   * Logout
-   */
+  it("should generate a string on render", () => {
+    render(
+      <AuthContext.Provider value={contextValue}>
+        <AuthContextProvider>
+          <ChildComponent />
+        </AuthContextProvider>
+      </AuthContext.Provider>
+    );
+    expect(generateRandomString).toHaveBeenCalledWith(16);
+  });
 
+  // LOGIN
+  describe("Login", () => {
+    //TODO
+    it("should redirect to Spotify login page", () => {
+      window = Object.create(window);
+      const url = "http://localhost:3000";
+      Object.defineProperty(window, "location", {
+        value: { href: url },
+        writable: true,
+      });
+
+      expect(window.location.href).toEqual(url);
+    });
+  });
+
+  // LOGOUT
   describe("Logout", () => {
     it("should set isAuthenticated to false on logout", () => {
       const { result } = renderHook(() => useContext(AuthContext), {
