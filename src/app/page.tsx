@@ -3,18 +3,20 @@ import { NextPage } from "next";
 import { useContext, useEffect } from "react";
 import { AuthContext } from "@/store/AuthContext";
 import Button from "@/components/UI/Button/Button";
+import { useRouter } from "next/navigation";
 
 import { calculateExpirationDate } from "@/utils/ExpirationDate/ExpirationDate";
 
 const Home: NextPage = () => {
   const authCtx = useContext(AuthContext);
+  const router = useRouter();
 
   useEffect(() => {
     const checkAuthentication = async () => {
       //TODO: check for any
       const isAuthenticated: any = await authCtx.authDataHandler();
       if (isAuthenticated) {
-        window.location.href = "http://localhost:3000/profile";
+        router.push("/profile");
       }
     };
     checkAuthentication();
@@ -26,7 +28,7 @@ const Home: NextPage = () => {
         <h1 className="font-semibold text-3xl">Sign in with your Spotify account</h1>
         <Button
           className="w-4/5 px-10 h-14 bg-accent text-white text-xl lg:text-3xl overflow-hidden rounded-full absolute top-1/2 transform-translate-x-1/2 -translate-y-1/2"
-          onClick={() => calculateExpirationDate(3600)}
+          onClick={authCtx.login}
         >
           Sign in with Spotify
         </Button>

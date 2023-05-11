@@ -4,6 +4,8 @@ import axios from "axios";
 import Link from "next/link";
 import { NextPage } from "next";
 import { AuthContext } from "@/store/AuthContext";
+import SidePanel from "@/components/Layout/SidePanel/SidePanel";
+import ProfilePicture from "@/components/Profile/ProfilePicture";
 
 const ProfilePage: NextPage = () => {
   const [profile, setProfile] = useState<any>({});
@@ -42,15 +44,21 @@ const ProfilePage: NextPage = () => {
   }, []);
 
   return (
-    <div>
-      <Suspense fallback={<h1>Loading data</h1>}>
-        {profile && (
-          <div>
-            <h1>{profile.display_name}</h1>
-            {profile.uri && <Link href={profile.uri}>Link to his Spotify profile</Link>}
-          </div>
-        )}
-      </Suspense>
+    <div className="flex">
+      <SidePanel />
+      <main className="bg-background w-full h-screen py-14">
+        <Suspense fallback={<h1>Loading data</h1>}>
+          {profile && (
+            <div className="flex flex-col items-center">
+              <ProfilePicture />
+              <div>
+                <h1>{profile.display_name}</h1>
+                {profile.uri && <Link href={profile.uri}>Link to his Spotify profile</Link>}
+              </div>
+            </div>
+          )}
+        </Suspense>
+      </main>
     </div>
   );
 };
