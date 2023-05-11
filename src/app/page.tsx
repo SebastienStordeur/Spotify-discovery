@@ -5,8 +5,6 @@ import { AuthContext } from "@/store/AuthContext";
 import Button from "@/components/UI/Button/Button";
 import { useRouter } from "next/navigation";
 
-import { calculateExpirationDate } from "@/utils/ExpirationDate/ExpirationDate";
-
 const Home: NextPage = () => {
   const authCtx = useContext(AuthContext);
   const router = useRouter();

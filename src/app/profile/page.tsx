@@ -6,9 +6,11 @@ import { NextPage } from "next";
 import { AuthContext } from "@/store/AuthContext";
 import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import ProfilePicture from "@/components/Profile/ProfilePicture";
+import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
 
 const ProfilePage: NextPage = () => {
   const [profile, setProfile] = useState<any>({});
+  const [artists, setArtists] = useState<any>([]);
   const token = localStorage.getItem("token");
   const scope = "user-top-read";
 
@@ -19,34 +21,29 @@ const ProfilePage: NextPage = () => {
       .get("https://api.spotify.com/v1/me", {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
-        console.log(res.data);
-        setProfile(res.data);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .then((res) => setProfile(res.data))
+      .catch((err) => console.error(err));
   };
 
   useEffect(() => {
     getCurrentUser();
     axios
-      .get(
-        `https://api.spotify.com/v1/recommendations?limit=5&seed_artists=4NHQUGzhtTLFvgF5SZesLK&&seed_genres=classical,country&seed_tracks=0c6xIDDpzE81m2q797ordA`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      )
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error("ERROR", err));
+      .get(`https://api.spotify.com/v1/me/top/artists?limit=50`, {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        console.log(res.data.items);
+        setArtists(res.data.items);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }, []);
 
   return (
     <div className="flex">
       <SidePanel />
-      <main className="bg-background w-full h-screen py-14">
+      <main className="px-10 bg-background w-full h-screen py-14">
         <Suspense fallback={<h1>Loading data</h1>}>
           {profile && (
             <div className="flex flex-col items-center">
@@ -57,6 +54,7 @@ const ProfilePage: NextPage = () => {
               </div>
             </div>
           )}
+          {artists && <FavoritesSongs data={artists} />}
         </Suspense>
       </main>
     </div>
