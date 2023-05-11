@@ -5,28 +5,12 @@ export function FormatData(data: []) {
   const categorizedGenres: { genre: string; count: number }[] = [];
 
   for (const genre of genres) {
-    const matchingMainGenres = mainGenres.filter((mainGenre) => genre.includes(mainGenre));
+    const matchingMainGenre = mainGenres.find((mainGenre) => genre.includes(mainGenre));
+    const targetGenre = matchingMainGenre || "others";
+    const existingGenre = categorizedGenres.find((item) => item.genre === targetGenre);
 
-    if (matchingMainGenres.length > 0) {
-      const mainGenre = matchingMainGenres[0];
-      const existingGenre = categorizedGenres.find((item) => item.genre === mainGenre);
-
-      if (existingGenre) {
-        existingGenre.count++;
-      } else {
-        categorizedGenres.push({ genre: mainGenre, count: 1 });
-      }
-    } else {
-      const existingGenre = categorizedGenres.find((item) => item.genre === "others");
-
-      if (existingGenre) {
-        existingGenre.count++;
-      } else {
-        categorizedGenres.push({ genre: "others", count: 1 });
-      }
-    }
+    existingGenre ? existingGenre.count++ : categorizedGenres.push({ genre: targetGenre, count: 1 });
   }
-
   return categorizedGenres;
 }
 
