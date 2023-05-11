@@ -7,6 +7,8 @@ import { AuthContext } from "@/store/AuthContext";
 import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import ProfilePicture from "@/components/Profile/ProfilePicture";
 import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
+import MostListenedGenre from "@/components/Profile/Favorites/MostListenedGenre";
+import { FormatData } from "@/utils/FormatDataGenres/FormatData";
 
 const ProfilePage: NextPage = () => {
   const [profile, setProfile] = useState<any>({});
@@ -32,13 +34,17 @@ const ProfilePage: NextPage = () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => {
-        console.log(res.data.items);
+        /* console.log(res.data.items); */
         setArtists(res.data.items);
       })
       .catch((err) => {
         console.error(err);
       });
   }, []);
+
+  useEffect(() => {
+    FormatData(artists);
+  }, [artists]);
 
   return (
     <div className="flex">
@@ -55,6 +61,7 @@ const ProfilePage: NextPage = () => {
             </div>
           )}
           {artists && <FavoritesSongs data={artists} />}
+          <MostListenedGenre />
         </Suspense>
       </main>
     </div>
