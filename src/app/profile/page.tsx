@@ -9,10 +9,12 @@ import ProfilePicture from "@/components/Profile/ProfilePicture";
 import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
 import MostListenedGenre from "@/components/Profile/Favorites/MostListenedGenre";
 import { FormatData } from "@/utils/FormatDataGenres/FormatData";
+import TopGenres from "@/components/Profile/Charts/TopGenres";
 
 const ProfilePage: NextPage = () => {
   const [profile, setProfile] = useState<any>({});
   const [artists, setArtists] = useState<any>([]);
+  const [data, setDatas] = useState<any>();
   const token = localStorage.getItem("token");
   const authCtx = useContext(AuthContext);
 
@@ -37,7 +39,9 @@ const ProfilePage: NextPage = () => {
   }, []);
 
   useEffect(() => {
-    FormatData(artists);
+    const formatedData = FormatData(artists);
+    setDatas(formatedData);
+    console.log(data);
   }, [artists]);
 
   return (
@@ -55,7 +59,7 @@ const ProfilePage: NextPage = () => {
             </div>
           )}
           {artists && <FavoritesSongs data={artists} />}
-          <MostListenedGenre />
+          {data && data.length > 0 && <TopGenres data={data} />}
         </Suspense>
       </main>
     </div>
