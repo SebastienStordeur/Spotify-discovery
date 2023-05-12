@@ -63,7 +63,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     const currentTime = Date.now();
     const tokenExpirationTime = localStorage.getItem("expirationTime");
 
-    if (tokenExpirationTime && currentTime - +tokenExpirationTime < 0) {
+    if (tokenExpirationTime && +tokenExpirationTime - currentTime < 0) {
       router.push("/");
     }
     return;

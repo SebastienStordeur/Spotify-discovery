@@ -14,8 +14,6 @@ const ProfilePage: NextPage = () => {
   const [profile, setProfile] = useState<any>({});
   const [artists, setArtists] = useState<any>([]);
   const token = localStorage.getItem("token");
-  const scope = "user-top-read";
-
   const authCtx = useContext(AuthContext);
 
   const getCurrentUser = async () => {
@@ -28,6 +26,7 @@ const ProfilePage: NextPage = () => {
   };
 
   useEffect(() => {
+    authCtx.checkTokenValidity();
     getCurrentUser();
     axios
       .get(`https://api.spotify.com/v1/me/top/artists?limit=50`, {
@@ -40,10 +39,6 @@ const ProfilePage: NextPage = () => {
   useEffect(() => {
     FormatData(artists);
   }, [artists]);
-
-  useEffect(() => {
-    authCtx.checkTokenValidity();
-  }, []);
 
   return (
     <div className="flex">
