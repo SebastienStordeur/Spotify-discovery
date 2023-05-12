@@ -1,6 +1,7 @@
 "use client";
 import { generateRandomString } from "@/Spotify/CodeVerifier";
 import { calculateExpirationDate } from "@/utils/ExpirationDate/ExpirationDate";
+import { useRouter } from "next/navigation";
 import { createContext, useState } from "react";
 import React from "react";
 
@@ -12,6 +13,7 @@ export const AuthContext = createContext({
   login: () => {},
   authDataHandler: () => {},
   logout: () => {},
+  checkTokenValidity: () => {},
 });
 
 const getParamsFromAPI = (hash: string) => {
@@ -29,6 +31,7 @@ const getParamsFromAPI = (hash: string) => {
 
 const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+  const router = useRouter();
 
   const state = generateRandomString(16);
   const scope = "user-read-private user-read-email user-top-read";
@@ -56,7 +59,17 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
     localStorage.clear();
   };
 
-  const values = { isAuthenticated, login, logout, authDataHandler };
+  const checkTokenValidity = () => {
+    const currentTime = Date.now();
+    const tokenExpirationTime = localStorage.getItem("expirationTime");
+
+    if (tokenExpirationTime && currentTime - +tokenExpirationTime < 0) {
+      router.push("/");
+    }
+    return;
+  };
+
+  const values = { isAuthenticated, login, logout, authDataHandler, checkTokenValidity };
 
   return <AuthContext.Provider value={values}>{children}</AuthContext.Provider>;
 };

@@ -30,7 +30,9 @@ describe("AuthContextProvider", () => {
     login: () => {},
     authDataHandler: () => {},
     logout: () => {},
+    checkTokenValidity: () => {},
   };
+
   const ChildComponent = (): JSX.Element => <div>Child component</div>;
 
   it("should render children components", () => {

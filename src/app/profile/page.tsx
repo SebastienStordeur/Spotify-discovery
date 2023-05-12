@@ -33,18 +33,17 @@ const ProfilePage: NextPage = () => {
       .get(`https://api.spotify.com/v1/me/top/artists?limit=50`, {
         headers: { Authorization: `Bearer ${token}` },
       })
-      .then((res) => {
-        /* console.log(res.data.items); */
-        setArtists(res.data.items);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+      .then((res) => setArtists(res.data.items))
+      .catch((err) => console.error(err));
   }, []);
 
   useEffect(() => {
     FormatData(artists);
   }, [artists]);
+
+  useEffect(() => {
+    authCtx.checkTokenValidity();
+  }, []);
 
   return (
     <div className="flex">
