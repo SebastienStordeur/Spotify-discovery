@@ -7,7 +7,6 @@ import { AuthContext } from "@/store/AuthContext";
 import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import ProfilePicture from "@/components/Profile/ProfilePicture";
 import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
-import MostListenedGenre from "@/components/Profile/Favorites/MostListenedGenre";
 import { FormatData } from "@/utils/FormatDataGenres/FormatData";
 import TopGenres from "@/components/Profile/Charts/TopGenres";
 
@@ -53,7 +52,7 @@ const ProfilePage: NextPage = () => {
             <div className="flex flex-col items-center">
               <ProfilePicture />
               <div>
-                <h1>{profile.display_name}</h1>
+                <h1 className="text-white font-semibold text-lg text-center">{profile.display_name}</h1>
                 {profile.uri && <Link href={profile.uri}>Link to his Spotify profile</Link>}
               </div>
             </div>
