@@ -1,13 +1,15 @@
 "use client";
-import React, { useEffect, useState, Suspense, useContext } from "react";
-import axios from "axios";
+import { useEffect, useState, Suspense, useContext } from "react";
 import Link from "next/link";
 import { NextPage } from "next";
+import axios from "axios";
+
 import { AuthContext } from "@/store/AuthContext";
+import { FormatData } from "@/utils/FormatDataGenres/FormatData";
+
 import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import ProfilePicture from "@/components/Profile/ProfilePicture";
 import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
-import { FormatData } from "@/utils/FormatDataGenres/FormatData";
 import TopGenres from "@/components/Profile/Charts/TopGenres";
 
 const ProfilePage: NextPage = () => {
@@ -66,5 +68,3 @@ const ProfilePage: NextPage = () => {
 };
 
 export default ProfilePage;
-
-/*  */

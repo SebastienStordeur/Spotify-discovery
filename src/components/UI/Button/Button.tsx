@@ -12,4 +12,4 @@ const Button: React.FC<ButtonProps> = ({ children, onClick, ...rest }) => {
   );
 };
 
-export default Button;
+export default React.memo(Button);

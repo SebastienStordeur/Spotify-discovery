@@ -14,7 +14,7 @@ export function FormatData(data: []) {
   return categorizedGenres;
 }
 
-function filterGenres(data: []) {
+export function filterGenres(data: any[]) {
   let genres: any = [];
 
   data.forEach((artist: any) => {

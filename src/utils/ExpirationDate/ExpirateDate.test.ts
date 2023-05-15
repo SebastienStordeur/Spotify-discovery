@@ -8,7 +8,6 @@ describe("calculateExpirationDate", () => {
     const expectedExpirationTime = now + duration * 1000;
 
     // Added a 100ms tolerance range
-
     expect(typeof expirationTime).toBe("number");
     expect(expirationTime).toBeGreaterThanOrEqual(expectedExpirationTime - 100);
     expect(expirationTime).toBeLessThanOrEqual(expectedExpirationTime + 100);

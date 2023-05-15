@@ -3,7 +3,7 @@ import React, { InputHTMLAttributes } from "react";
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 const Input: React.FC<InputProps> = ({ ...rest }) => {
-  return <input />;
+  return <input {...rest} />;
 };
 
-export default Input;
+export default React.memo(Input);
