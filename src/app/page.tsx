@@ -27,6 +27,7 @@ const Home: NextPage = () => {
         <Button
           className="w-4/5 px-10 h-14 bg-accent text-white text-xl lg:text-3xl overflow-hidden rounded-full absolute top-1/2 transform-translate-x-1/2 -translate-y-1/2"
           onClick={authCtx.login}
+          aria-label="Sign in with Spotify"
         >
           Sign in with Spotify
         </Button>
