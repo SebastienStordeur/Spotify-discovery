@@ -1,9 +1,9 @@
-import React, { InputHTMLAttributes } from "react";
+import { FC, InputHTMLAttributes, memo } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-const Input: React.FC<InputProps> = ({ ...rest }) => {
+const Input: FC<InputProps> = ({ ...rest }) => {
   return <input {...rest} />;
 };
 
-export default React.memo(Input);
+export default memo(Input);
