@@ -13,7 +13,7 @@ import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
 import TopGenres from "@/components/Profile/Charts/TopGenres";
 
 const ProfilePage: NextPage = () => {
-  const [profile, setProfile] = useState<any>({ profile: null, artists: null });
+  const [profile, setProfile] = useState<any>({ profile: null, artists: null, playlists: null });
   const [data, setDatas] = useState<any>();
   const token = localStorage.getItem("token");
   const authCtx = useContext(AuthContext);
@@ -22,9 +22,7 @@ const ProfilePage: NextPage = () => {
 
   const getCurrentUserInformations = async (url: string, param: string) => {
     await axios
-      .get(url, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get(url, { headers: { Authorization: `Bearer ${token}` } })
       .then((res) => setProfile((prev: any) => ({ ...prev, [param]: res.data })))
       .catch((err) => console.error(err));
   };
@@ -32,10 +30,9 @@ const ProfilePage: NextPage = () => {
   useEffect(() => {
     authCtx.checkTokenValidity();
     getCurrentUserInformations(url, "profile");
-    getCurrentUserInformations("https://api.spotify.com/v1/me/top/artists?limit=50", "artists");
+    getCurrentUserInformations(url + "/top/artists?limit=50", "artists");
+    getCurrentUserInformations(url + "/playlists", "playlists");
   }, []);
-
-  //playlist = https://api.spotify.com/v1/me/playlists
 
   useEffect(() => {
     if (profile.artists) {
@@ -61,6 +58,13 @@ const ProfilePage: NextPage = () => {
           )}
           {profile.artists && <FavoritesSongs data={profile.artists.items} />}
           {data && data.length > 0 && <TopGenres data={data} />}
+          {profile.playlists && (
+            <div>
+              {profile.playlists.items.map((playlist: any) => {
+                return <div>{playlist.name}</div>;
+              })}
+            </div>
+          )}
         </Suspense>
       </main>
     </div>
