@@ -8,12 +8,12 @@ import { AuthContext } from "@/store/AuthContext";
 import { FormatData } from "@/utils/FormatDataGenres/FormatData";
 
 import SidePanel from "@/components/Layout/SidePanel/SidePanel";
-import ProfilePicture from "@/components/Profile/ProfilePicture";
 import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
 import TopGenres from "@/components/Profile/Charts/TopGenres";
 import ProfileContainer from "@/components/Profile/ProfileContainer/ProfileContainer";
 
 const ProfilePage: NextPage = () => {
+  //Change profile to currentUser
   const [profile, setProfile] = useState<any>({ profile: null, artists: null, playlists: null });
   const [data, setDatas] = useState<any>();
   const token = localStorage.getItem("token");

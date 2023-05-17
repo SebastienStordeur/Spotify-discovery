@@ -13,8 +13,8 @@ module.exports = {
       colors: {
         primary: "",
         accent: "#1ED760",
-        darkbg: "#3A3A3A",
-        background: "#434141",
+        darkbg: "#040306",
+        background: "#242424",
       },
     },
   },

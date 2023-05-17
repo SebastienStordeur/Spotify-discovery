@@ -4,16 +4,21 @@ interface PlaylistProps {
   playlists: any;
 }
 
-const Playlists: FC<PlaylistProps> = (props) => {
-  console.log(props);
+const Playlists: FC<PlaylistProps> = ({ playlists }) => {
+  console.log(playlists);
+
   return (
-    <div className="flex flex-col h-40 w-72 bg-darkbg">
-      <ul>
-        {props.playlists.items.map((playlist: any) => {
-          return <li>{playlist.name}</li>;
-        })}
-      </ul>
-    </div>
+    <>
+      {playlists && (
+        <div className="flex flex-col h-40 w-72 bg-darkbg">
+          <ul>
+            {playlists.items.map((playlist: any) => {
+              return <li>{playlist.name}</li>;
+            })}
+          </ul>
+        </div>
+      )}
+    </>
   );
 };
 
