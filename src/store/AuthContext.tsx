@@ -34,7 +34,7 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
 
   const state = generateRandomString(16);
-  const scope = "user-read-private user-read-email user-top-read";
+  const scope = "user-read-private user-read-email user-top-read playlist-read-private";
   const spotifyUrl = `https://accounts.spotify.com/authorize?response_type=token&client_id=${CLIENT_ID}&scope=${scope}&redirect_uri=${REDIRECT_URI}&state=${state}&show_dialog=true`;
 
   const login = async () => {
