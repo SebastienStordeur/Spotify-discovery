@@ -11,6 +11,7 @@ import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import FavoritesSongs from "@/components/Profile/Favorites/FavoritesSongs";
 import TopGenres from "@/components/Profile/Charts/TopGenres";
 import ProfileContainer from "@/components/Profile/ProfileContainer/ProfileContainer";
+import Main from "@/components/Layout/Main/Main";
 
 const ProfilePage: NextPage = () => {
   //Change profile to currentUser
@@ -44,9 +45,9 @@ const ProfilePage: NextPage = () => {
   }, [profile]);
 
   return (
-    <div className="flex">
+    <Main>
       <SidePanel />
-      <main className="px-10 bg-background w-full h-screen py-14">
+      <section className="md:ml-24 px-8 md:px-14 bg-background w-full min-h-full py-8 md:py-14">
         <Suspense fallback={<h1>Loading data</h1>}>
           {profile.profile && <ProfileContainer profile={profile} />}
           {profile.artists && <FavoritesSongs data={profile.artists.items} />}
@@ -59,8 +60,8 @@ const ProfilePage: NextPage = () => {
             </div>
           )}
         </Suspense>
-      </main>
-    </div>
+      </section>
+    </Main>
   );
 };
 
