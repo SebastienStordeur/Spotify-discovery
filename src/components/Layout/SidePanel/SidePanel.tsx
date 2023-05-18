@@ -4,7 +4,7 @@ import music from "../../../assets/icons/music.svg";
 
 const SidePanel: FC = () => {
   return (
-    <div className="hidden md:flex items-center h-screen w-24 bg-darkbg">
+    <div className="hidden md:flex items-center h-screen w-24 bg-darkbg fixed">
       <ul className="w-full relative text-xs">
         <li className="flex justify-center items-center text-center h-16 w-full cursor-pointer hover:bg-accent">
           <Link href="/profile" className="text-white font-semibold font-xs">
