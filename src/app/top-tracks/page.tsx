@@ -27,10 +27,10 @@ const TopTracksPage: NextPage = () => {
                 console.log(track);
                 const { genres, artists, name, href, duration_ms } = track;
                 return (
+                  // List artist - track - duration
                   <div className="h-20 w-20">
                     {name}
                     {artists[0].name}
-                    {/* <img src={images[0].url} alt="" /> */}
                   </div>
                 );
               })}
