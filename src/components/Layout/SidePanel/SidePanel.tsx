@@ -16,7 +16,7 @@ const SidePanel: FC = () => {
   ];
 
   return (
-    <div className="hidden md:flex items-center h-screen w-24 bg-darkbg fixed">
+    <div className="hidden md:flex items-center h-screen w-24 bg-darkbg fixed shadow-lg shadow-darkbg">
       <ul className="w-full relative text-xs">
         {links.map((link) => (
           <li
