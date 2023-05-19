@@ -7,7 +7,7 @@ import axios from "axios";
 import { NextPage } from "next";
 import React, { Suspense, useEffect, useState } from "react";
 
-const page: NextPage = () => {
+const TopArtistsPage: NextPage = () => {
   const token = localStorage.getItem("token");
   const [artists, setArtists] = useState<any>([]);
 
@@ -37,4 +37,4 @@ const page: NextPage = () => {
   );
 };
 
-export default page;
+export default TopArtistsPage;
