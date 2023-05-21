@@ -33,6 +33,7 @@ const ProfilePage: NextPage = () => {
     authCtx.checkTokenValidity();
     getCurrentUserInformations(url, "profile");
     getCurrentUserInformations(url + "/top/artists?limit=50", "artists");
+    getCurrentUserInformations(url + "/playlists", "playlists");
   }, []);
 
   useEffect(() => {
@@ -46,11 +47,13 @@ const ProfilePage: NextPage = () => {
   return (
     <Main>
       <SidePanel />
-      <section className="md:ml-24 px-8 md:px-14 bg-background w-full min-h-full py-8 md:py-14">
+      <section className="md:ml-24 px-8 md:px-14 bg-background w-full min-h-full md:py-14">
         <Suspense fallback={<h1>Loading data</h1>}>
-          {profile.profile && <ProfileContainer profile={profile} />}
-          {profile.artists && <FavoritesSongs data={profile.artists.items} />}
-          {data && data.length > 0 && <TopGenres data={data} />}
+          {profile.profile && profile.playlists && <ProfileContainer profile={profile} />}
+          <div className="grid grid-cols-2 w-full h-3/6 relative my-4">
+            {profile.artists && <FavoritesSongs data={profile.artists.items} />}
+            {data && data.length > 0 && <TopGenres data={data} />}
+          </div>
         </Suspense>
       </section>
     </Main>

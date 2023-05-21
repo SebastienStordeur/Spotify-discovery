@@ -20,11 +20,11 @@ const CustomLegend = ({ data, colors }: { data: any[]; colors: string[] }) => {
 };
 
 const TopGenres = ({ data }: { data: any[] }) => {
-  const COLORS = ["#FF0000", "#FFF555", "#999DDD", "#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#55555", "#333485"];
+  const COLORS = ["#FF0000", "#FFF555", "#999DDD", "#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#258741", "#ffffff"];
 
   return (
-    <div className="flex w-full h-full relative my-8">
-      <ResponsiveContainer width="50%" height="25%">
+    <div className="flex w-full h-full relative my-12">
+      <ResponsiveContainer width="100%" height="40%">
         <PieChart width={200} height={200}>
           <Pie data={data} dataKey="count" nameKey="genre" cx="50%" cy="50%" outerRadius={80}>
             {data.map((_, index: number) => (
