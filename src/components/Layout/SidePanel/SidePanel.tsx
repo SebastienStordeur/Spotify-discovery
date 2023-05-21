@@ -13,6 +13,7 @@ const SidePanel: FC = () => {
     { url: "/profile", name: "Profile", icon: profile, activeIcon: activeProfile },
     { url: "/top-artists", name: "Top artists", icon: music, activeIcon: activeMusic },
     { url: "/playlists", name: "Playlists", icon: music, activeIcon: activeMusic },
+    { url: "/top-tracks", name: "Top tracks", icon: music, activeIcon: activeMusic },
   ];
 
   return (
