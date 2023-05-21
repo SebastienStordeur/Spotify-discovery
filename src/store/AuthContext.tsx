@@ -6,7 +6,7 @@ import { createContext, useState } from "react";
 import React from "react";
 
 const CLIENT_ID = process.env.NEXT_PUBLIC_CLIENT_ID;
-const REDIRECT_URI = "http://localhost:3000/";
+const REDIRECT_URI = "https://spotify-discovery-g17906ksw-sebastienstordeur.vercel.app/";
 
 export const AuthContext = createContext({
   isAuthenticated: false,
