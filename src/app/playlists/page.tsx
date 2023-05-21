@@ -5,9 +5,9 @@ import Playlist from "@/components/Playlists/Playlist/Playlist";
 import { AuthContext } from "@/store/AuthContext";
 import { getDataFromAPI } from "@/utils/GetInformationsApi/GetInformationAPI";
 import { NextPage } from "next";
-import React, { Suspense, useContext, useEffect, useState } from "react";
+import React, { FC, Suspense, useContext, useEffect, useState } from "react";
 
-const PlaylistPage: NextPage = () => {
+const PlaylistPage: FC = () => {
   const authCtx = useContext(AuthContext);
   authCtx.checkTokenValidity();
   const [playlists, setPlaylists] = useState<any>([]);
