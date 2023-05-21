@@ -1,34 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Spotify Data Project
+
+This project utilizes the Spotify API to retrieve information about the user's favorite songs and artists. It provides features to fetch user profile data, top tracks, top artists, and playlists.
+
+![screenshot](./public/Profile.PNG)
+
+## Prerequisites
+
+Before running the project, make sure you have the following prerequisites:
+
+- Node.js (v14 or above)
+- npm (Node Package Manager) or yarn
 
 ## Getting Started
 
-First, run the development server:
+Follow the steps below to get the project up and running:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+1. Clone the project repository.
+2. Install the project dependencies by running `npm install` or `yarn install`.
+3. Configure the Spotify API credentials by creating a `.env` file in the project root directory. Add the following variables:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+SPOTIFY_CLIENT_ID=your_spotify_client_id
+SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Replace `your_spotify_client_id` and `your_spotify_client_secret` with your actual Spotify API credentials.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Start the development server by running `npm run dev` or `yarn dev`.
+5. Open your web browser and access the application at `http://localhost:3000`.
 
-## Learn More
+## Features
 
-To learn more about Next.js, take a look at the following resources:
+The Spotify Data Project includes the following features:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- User authentication using Spotify
+- Displaying user profile information
+- Fetching and displaying top tracks
+- Fetching and displaying top artists
+- Fetching and displaying playlists
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Technologies Used
 
-## Deploy on Vercel
+The project is built using the following technologies:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- React
+- Next.js
+- Spotify API
+- Tailwind CSS
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
