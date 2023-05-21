@@ -12,8 +12,10 @@ const TopTracksPage: NextPage = () => {
   const authCtx = useContext(AuthContext);
 
   useEffect(() => {
-    authCtx.checkTokenValidity();
-    getDataFromAPI("https://api.spotify.com/v1/me/top/tracks?limit=50", setTracks);
+    if (typeof window !== "undefined") {
+      authCtx.checkTokenValidity();
+      getDataFromAPI("https://api.spotify.com/v1/me/top/tracks?limit=50", setTracks);
+    }
   }, [authCtx]);
 
   return (

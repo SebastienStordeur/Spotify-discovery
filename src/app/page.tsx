@@ -11,14 +11,13 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     const checkAuthentication = async () => {
-      //TODO: check for any
       const isAuthenticated: any = await authCtx.authDataHandler();
       if (isAuthenticated) {
         router.push("/profile");
       }
     };
     checkAuthentication();
-  }, []);
+  }, [authCtx, router]);
 
   return (
     <div className="h-screen flex justify-center items-center overflow-hidden bg-background">
