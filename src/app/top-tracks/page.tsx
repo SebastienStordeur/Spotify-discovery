@@ -23,12 +23,10 @@ const TopTracksPage: NextPage = () => {
         <h1 className="text-white text-2xl font-semibold">Find all your most listened tracks</h1>
         {tracks && (
           <Suspense fallback={<h2>Loading data</h2>}>
-            '
             <ul className="grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 py-16">
-              {tracks.map((track: any) => {
-                console.log(track);
+              {tracks.map((track: { artists: any[]; name: string; duration_ms: number }) => {
                 const { artists, name, duration_ms } = track;
-                return <Track artists={artists} name={name} duration={duration_ms} />;
+                return <Track key={name + duration_ms} artists={artists} name={name} duration={duration_ms} />;
               })}
             </ul>
           </Suspense>

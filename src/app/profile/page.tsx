@@ -33,7 +33,6 @@ const ProfilePage: NextPage = () => {
     authCtx.checkTokenValidity();
     getCurrentUserInformations(url, "profile");
     getCurrentUserInformations(url + "/top/artists?limit=50", "artists");
-    getCurrentUserInformations(url + "/playlists", "playlists");
   }, []);
 
   useEffect(() => {
@@ -52,13 +51,6 @@ const ProfilePage: NextPage = () => {
           {profile.profile && <ProfileContainer profile={profile} />}
           {profile.artists && <FavoritesSongs data={profile.artists.items} />}
           {data && data.length > 0 && <TopGenres data={data} />}
-          {profile.playlists && (
-            <div>
-              {profile.playlists.items.map((playlist: any) => {
-                return <div>{playlist.name}</div>;
-              })}
-            </div>
-          )}
         </Suspense>
       </section>
     </Main>

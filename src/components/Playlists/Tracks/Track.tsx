@@ -1,8 +1,7 @@
 import React, { FC } from "react";
 
 interface TrackProps {
-  artists: any;
-
+  artists: { name: string }[];
   name: string;
   duration: number;
 }
@@ -21,7 +20,11 @@ const Track: FC<TrackProps> = ({ artists, name, duration }) => {
         <span className="ml-6">{convertMsToMinute(duration)}</span>
       </h3>
       {artists.map((artist: { name: string }, index: number) => {
-        return <span className="italic text-accent">{index === artists.length - 1 ? artist.name : artist.name + ", "}</span>;
+        return (
+          <span key={name + Math.random()} className="italic text-accent">
+            {index === artists.length - 1 ? artist.name : artist.name + ", "}
+          </span>
+        );
       })}
     </li>
   );

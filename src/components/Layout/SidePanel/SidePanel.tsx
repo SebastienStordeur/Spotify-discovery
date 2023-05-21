@@ -24,7 +24,9 @@ const SidePanel: FC = () => {
         {links.map((link) => (
           <li
             key={link.name}
-            className={`flex justify-center items-center h-16 w-full cursor-pointer ${pathname === link.url ? "text-accent bg-background" : "text-white"}`}
+            className={`flex justify-center items-center h-16 w-full cursor-pointer transition-all duration-500 hover:text-accent hover:bg-background ${
+              pathname === link.url ? "text-accent bg-background" : "text-white"
+            }`}
           >
             <Link href={link.url} className="flex flex-col items-center font-semibold font-xs">
               <Image src={pathname === link.url ? link.activeIcon : link.icon} alt="" width={16} height={16} />
