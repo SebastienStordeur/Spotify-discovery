@@ -1,8 +1,8 @@
 import axios from "axios";
 
-const token = localStorage.getItem("token");
-
 export const getDataFromAPI = async (url: string, setData: React.SetStateAction<any>, param?: string) => {
+  const token = localStorage.getItem("token");
+
   await axios
     .get(url, { headers: { Authorization: `Bearer ${token}` } })
     .then((res) => {
