@@ -14,7 +14,7 @@ const TopArtistsPage: NextPage = () => {
   useEffect(() => {
     authCtx.checkTokenValidity();
     getDataFromAPI("https://api.spotify.com/v1/me/top/artists?limit=50", setArtists);
-  }, []);
+  }, [authCtx]);
 
   return (
     <Main>

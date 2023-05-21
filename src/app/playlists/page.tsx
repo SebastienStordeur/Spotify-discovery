@@ -15,7 +15,7 @@ const page: NextPage = () => {
   useEffect(() => {
     authCtx.checkTokenValidity();
     getDataFromAPI("https://api.spotify.com/v1/me/playlists", setPlaylists);
-  }, []);
+  }, [authCtx]);
 
   return (
     <Main>

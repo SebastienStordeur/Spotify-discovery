@@ -24,7 +24,7 @@ const ProfilePage: NextPage = () => {
     getDataFromAPI(url, setProfile, "profile");
     getDataFromAPI(url + "/top/artists?limit=50", setProfile, "artists");
     getDataFromAPI(url + "/playlists", setProfile, "playlists");
-  }, []);
+  }, [authCtx]);
 
   useEffect(() => {
     if (profile.artists) {
