@@ -4,7 +4,6 @@ import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import Playlist from "@/components/Playlists/Playlist/Playlist";
 import { AuthContext } from "@/store/AuthContext";
 import { getDataFromAPI } from "@/utils/GetInformationsApi/GetInformationAPI";
-import { NextPage } from "next";
 import React, { FC, Suspense, useContext, useEffect, useState } from "react";
 
 const PlaylistPage: FC = () => {
@@ -13,8 +12,10 @@ const PlaylistPage: FC = () => {
   const [playlists, setPlaylists] = useState<any>([]);
 
   useEffect(() => {
-    authCtx.checkTokenValidity();
-    getDataFromAPI("https://api.spotify.com/v1/me/playlists", setPlaylists);
+    if (typeof window !== "undefined") {
+      authCtx.checkTokenValidity();
+      getDataFromAPI("https://api.spotify.com/v1/me/playlists", setPlaylists);
+    }
   }, [authCtx]);
 
   return (
