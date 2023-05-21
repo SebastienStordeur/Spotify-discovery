@@ -7,7 +7,7 @@ import { getDataFromAPI } from "@/utils/GetInformationsApi/GetInformationAPI";
 import { NextPage } from "next";
 import React, { Suspense, useContext, useEffect, useState } from "react";
 
-const page: NextPage = () => {
+const PlaylistPage: NextPage = () => {
   const authCtx = useContext(AuthContext);
   authCtx.checkTokenValidity();
   const [playlists, setPlaylists] = useState<any>([]);
@@ -37,4 +37,4 @@ const page: NextPage = () => {
   );
 };
 
-export default page;
+export default PlaylistPage;
