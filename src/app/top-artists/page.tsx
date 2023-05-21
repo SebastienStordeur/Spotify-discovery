@@ -25,7 +25,7 @@ const TopArtistsPage: NextPage = () => {
           {artists && (
             <Suspense fallback={<h2>Loading data</h2>}>
               {artists.map((artist: any) => {
-                return <Artist artist={artist} />;
+                return <Artist key={artist.name + Math.random()} artist={artist} />;
               })}
             </Suspense>
           )}
