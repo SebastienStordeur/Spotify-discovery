@@ -46,10 +46,13 @@ const AuthContextProvider = ({ children }: { children: React.ReactNode }) => {
       const { access_token, expires_in } = getParamsFromAPI(window.location.hash);
       const expirationTime = calculateExpirationDate(+expires_in);
 
-      localStorage.setItem("token", access_token);
-      localStorage.setItem("expirationTime", JSON.stringify(expirationTime));
-      setIsAuthenticated(true);
-      return true;
+      if (typeof window !== "undefined") {
+        localStorage.setItem("token", access_token);
+        localStorage.setItem("expirationTime", JSON.stringify(expirationTime));
+        setIsAuthenticated(true);
+        return true;
+      }
+      return false;
     }
     return false;
   };
