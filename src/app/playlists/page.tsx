@@ -25,7 +25,7 @@ const PlaylistPage: FC = () => {
         <div className="grid sm:grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-3 lg:gap-16 xl:grid-cols-4 py-8 md:py-16">
           {playlists && (
             <Suspense fallback={<h2>Loading data</h2>}>
-              {!playlists && <p>You don't have any playlist to showcase.</p>}
+              {!playlists && <p>You don&apos;t have any playlist to showcase.</p>}
               {playlists.map((playlist: any) => {
                 return <Playlist key={playlist.id} playlist={playlist} />;
               })}
