@@ -19,8 +19,8 @@ Follow the steps below to get the project up and running:
 2. Install the project dependencies by running `npm install` or `yarn install`.
 3. Configure the Spotify API credentials by creating a `.env` file in the project root directory. Add the following variables:
 
-SPOTIFY_CLIENT_ID=your_spotify_client_id
-SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
+- SPOTIFY_CLIENT_ID=your_spotify_client_id
+- SPOTIFY_CLIENT_SECRET=your_spotify_client_secret
 
 Replace `your_spotify_client_id` and `your_spotify_client_secret` with your actual Spotify API credentials.
 
@@ -45,6 +45,7 @@ The project is built using the following technologies:
 - Next.js
 - Spotify API
 - Tailwind CSS
+- Recharts
 
 ## License
 
