@@ -2,20 +2,20 @@
 import Main from "@/components/Layout/Main/Main";
 import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import Track from "@/components/Playlists/Tracks/Track";
-import axios from "axios";
+import { AuthContext } from "@/store/AuthContext";
+import { getDataFromAPI } from "@/utils/GetInformationsApi/GetInformationAPI";
 import { NextPage } from "next";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 
 const TopTracksPage: NextPage = () => {
-  const token = localStorage.getItem("token");
   const [tracks, setTracks] = useState<any>();
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("https://api.spotify.com/v1/me/top/tracks?limit=50", { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
-      console.log(res.data);
-      setTracks(res.data.items);
-    });
+    authCtx.checkTokenValidity();
+    getDataFromAPI("https://api.spotify.com/v1/me/top/tracks?limit=50", setTracks);
   }, []);
+
   return (
     <Main>
       <SidePanel />

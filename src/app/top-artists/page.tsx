@@ -2,20 +2,18 @@
 import Main from "@/components/Layout/Main/Main";
 import SidePanel from "@/components/Layout/SidePanel/SidePanel";
 import Artist from "@/components/Playlists/Artist/Artist";
-import Playlist from "@/components/Playlists/Playlist/Playlist";
-import axios from "axios";
+import { AuthContext } from "@/store/AuthContext";
+import { getDataFromAPI } from "@/utils/GetInformationsApi/GetInformationAPI";
 import { NextPage } from "next";
-import React, { Suspense, useEffect, useState } from "react";
+import React, { Suspense, useContext, useEffect, useState } from "react";
 
 const TopArtistsPage: NextPage = () => {
-  const token = localStorage.getItem("token");
   const [artists, setArtists] = useState<any>([]);
+  const authCtx = useContext(AuthContext);
 
   useEffect(() => {
-    axios.get("https://api.spotify.com/v1/me/top/artists?limit=50", { headers: { Authorization: `Bearer ${token}` } }).then((res) => {
-      console.log(res.data);
-      setArtists(res.data.items);
-    });
+    authCtx.checkTokenValidity();
+    getDataFromAPI("https://api.spotify.com/v1/me/top/artists?limit=50", setArtists);
   }, []);
 
   return (
