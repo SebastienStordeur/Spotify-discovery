@@ -27,8 +27,8 @@ const TopTracksPage: NextPage = () => {
             <ul className="grid md:grid-cols-2 md:gap-8 lg:grid-cols-3 xl:grid-cols-4 py-16">
               {tracks.map((track: any) => {
                 console.log(track);
-                const { artists, name, href, duration_ms } = track;
-                return <Track artists={artists} name={name} href={href} duration={duration_ms} />;
+                const { artists, name, duration_ms } = track;
+                return <Track artists={artists} name={name} duration={duration_ms} />;
               })}
             </ul>
           </Suspense>

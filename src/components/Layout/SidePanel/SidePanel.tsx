@@ -3,16 +3,18 @@ import Link from "next/link";
 import Image from "next/image";
 import music from "../../../assets/icons/music.svg";
 import profile from "../../../assets/icons/profile.svg";
+import playlist from "../../../assets/icons/playlist.svg";
 import activeMusic from "../../../assets/icons/activeMusic.svg";
 import activeProfile from "../../../assets/icons/activeProfile.svg";
+import activePlaylist from "../../../assets/icons/activePlaylist.svg";
 import { usePathname } from "next/navigation";
 
 const SidePanel: FC = () => {
   const pathname = usePathname();
   const links = [
     { url: "/profile", name: "Profile", icon: profile, activeIcon: activeProfile },
-    { url: "/top-artists", name: "Top artists", icon: music, activeIcon: activeMusic },
-    { url: "/playlists", name: "Playlists", icon: music, activeIcon: activeMusic },
+    { url: "/top-artists", name: "Top artists", icon: profile, activeIcon: activeProfile },
+    { url: "/playlists", name: "Playlists", icon: playlist, activeIcon: activePlaylist },
     { url: "/top-tracks", name: "Top tracks", icon: music, activeIcon: activeMusic },
   ];
 
