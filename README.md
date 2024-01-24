@@ -41,7 +41,6 @@ The Spotify Data Project includes the following features:
 
 The project is built using the following technologies:
 
-- React
 - Next.js
 - Spotify API
 - Tailwind CSS
